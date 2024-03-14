@@ -1,0 +1,12 @@
+names:
+- screw
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: cad-lqngi
+  url: https://universe.roboflow.com/cad-87e2z/cad-lqngi/dataset/2
+  version: 2
+  workspace: cad-87e2z
+test: test/images
+train: train/images
+val: valid/images
