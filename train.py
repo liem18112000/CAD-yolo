@@ -1,18 +1,24 @@
-from config import MODEL
-from roboflow import Roboflow
+from ultralytics import YOLO
+
+from config import HOME, PROJECT
+
 
 if __name__ == "__main__":
-    rf = Roboflow(api_key="xIfiwT8g9fPv9ZoJtmEh")
-    project = rf.workspace("cad-87e2z").project("cad-lqngi")
-    version = project.version(2)
-    dataset = version.download("yolov8")
-
-    # Train
-    MODEL.train(
-        data=f"{dataset.location}/data.yaml",
-        epochs=25,
-        imgsz=640
-    )
+    version = PROJECT.version(20)
+    dataset = version.download("yolov9")
+    location = dataset.location
+    for model_name in [
+        "yolov9c"
+    ]:
+        print(f"Model YOLO name: {model_name}")
+        model = YOLO(f'{HOME}/models/yolov9/{model_name}.pt')
+        model.train(
+            data=f"{location}/data.yaml",
+            epochs=300,
+            imgsz=640,
+            batch=10,
+            patience=10
+        )
 
 
 
